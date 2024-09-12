@@ -231,7 +231,7 @@ _Fig. Lab 2 DSS Overview_
 
 |   |   |
 |---|---|
-| 1 | Learning Check |
+| 1 | Wehn adding the Vcenter server, you get visibility into the Virtual Network. |
 | 2 | Learning Check|
 | 3 | Learning Check |  
 | 4 | Learning Check |  
