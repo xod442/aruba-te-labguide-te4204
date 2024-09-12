@@ -33,7 +33,7 @@ In this workflow the Aruba Fabric Composer (AFC) will automate configuring the r
 ![AFC Login](images/lab2-afc-login.png)  
 _Fig. AFC Login_  
 
-2. Once logged in, we will define **end point groups** EPG's allow us to build containers that have a similar services. This allows for security policy to be defined for host traffic between the EPG's.  
+2. Once logged in, we will define **end point groups** EPG's allow us to build containers for virtual machines that have a similar services. This allows for security policy to be defined for host traffic between the EPG's.  
 
 ```{note}
 If the workflows on the right-hand side are not present, click on the icon next to the person at the top right
