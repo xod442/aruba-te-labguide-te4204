@@ -3,7 +3,7 @@
 ![Disclosure](images/disclose.png)
 
 
-<h1>HPE Aruba Networking CX10K Spine/Leaf Workshop</h1>
+<h1>HPE Aruba Networking Telemetry with CX10K and ELK</h1>
 
 # Lab Overview
 During this session you will deploy a spine-leaf network as part of a distributed services architecture based on the CX 10000 Switch integrated stateful firewall preventing all traffic between two vlans but allowing ssh. You will use Aruba Fabric Composer to orchestrate the L3 spine-leaf. In addition, you will integrate AMD Pensando Policy and Services Manager as the intermediary between the CX 10000 switches and Fabric Composer for policy deployment and orchestration.
