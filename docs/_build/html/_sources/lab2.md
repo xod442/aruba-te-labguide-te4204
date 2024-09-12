@@ -33,14 +33,14 @@ In this workflow the Aruba Fabric Composer (AFC) will automate configuring the r
 ![AFC Login](images/lab2-afc-login.png)  
 _Fig. AFC Login_  
 
-2. Once logged in, we will use the **L3 Leaf-Spine Configuration** worflow on the right hand side to launch the configuration workflow. This workflow will configure all the routed interfaces used by the spine-leaf.  
+2. Once logged in, we will define **end point groups** EPG's allow us to build containers that have a similar services. This allows for security policy to be defined for host traffic between the EPG's.  
 
 ```{note}
 If the workflows on the right-hand side are not present, click on the icon next to the person at the top right
 ```  
 
-![AFC Wizard Menu](images/lab2-afc-wizard-menu.png)  
-_Fig. AFC Wizard Menu_  
+![Accessing the AFC](images/temp.png)  
+_Fig. Accessing the AFC_    
 
 3. Follow the workflow by filling out the forms and clicking next. Finish by reviewing content and selecting **Apply**.  
 
