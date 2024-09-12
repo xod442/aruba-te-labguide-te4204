@@ -5,8 +5,8 @@ Lab time:  45 minutes
 
 The spine leaf architecture provides for massive bandwidth between racks in the data center. Another reason for deploying a spine leaf is resiliency. The spine switches connect to leafs, the leafs, to the spines. The connections between them, are routed IP layer 3 links. They will not pass VLAN information. To get layer 2 traffic between the leafs, VXLAN must be used to create an overlay network.  
 
-![Spine Leaf Architecture](images/lab2-spine-leaf-architecture.png)  
-_Fig. Spine Leaf Architecture_  
+![Accessing the AFC](images/temp.png)  
+_Fig. Accessing the AFC_  
 
 ```{note}
 VSX Configuration is being skipped in this workshop due to limited hardware availability, but it is always recommended to configure a high-availability setup for critical server workloads. Refer to our Validated Solutions Guide (VSG) to learn more:  

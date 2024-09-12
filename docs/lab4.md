@@ -1,4 +1,4 @@
-# Lab 4 - Test the Policy  
+# Lab 4 - Using ELK stack for collections and visibility  
 
 ## Lab Overview
 Lab time:  30 minutes 
