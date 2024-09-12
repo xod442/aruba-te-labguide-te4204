@@ -51,12 +51,12 @@ Using the AFC we will add an integration with VMware vSphere.  This integration 
 ### Validate
 1. Open the AFC, click the **Configuration** menu, and select **Integrations** > **VMware vSphere**
 
-![Integrations Menu](images/lab3-integrations-menu.png)  
+![Integrations Menu](images/temp.png)  
 _Fig. Lab 4 Integrations Menu_  
 
 2. Using the **ACTIONS** menu, select **Add**.
 
-![Add Integration](images/lab3-add-integration.png)  
+![Add Integration](images/)  
 _Fig. Lab 4 Add Integration_  
 
 3. Add the vSphere integration by entering the following information in the form:  
