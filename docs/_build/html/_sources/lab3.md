@@ -1,4 +1,4 @@
-# Lab 3 - Create EPG's and Deploy a Policy  
+# Lab 3 - PSM Integration
 
 ## Lab Overview
 Lab time:  30 minutes  

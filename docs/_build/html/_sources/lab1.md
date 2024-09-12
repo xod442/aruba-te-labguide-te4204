@@ -35,21 +35,6 @@ The following table represents the Management IP Addresses we will use to access
 | CX Switches | DL 10.13.1010 |  
  
 
-
-## Lab 1.3 Pre-Staged Workshop Environment  
-
-This is an accelerated workshop. A lot of the initial setup functions have been already configured. For this workshop to be successfully completed, in a reasonable amount of time, the lab gear must be configured to a specific level. The follow items are pre-staged:
-- Discovery of the network switches  
-- Creating a fabric  
-- Adding the switches to the data center fabric  
-- Configuring Network Time Protocol (NTP)  
-- MAC and IPv4 pools  
-- Configuring Domain Naming Services (DNS)  
-- vSphere and Pensando integrations  
-
-### Vsphere integration
-For this workshop, the vSphere integration in AFC has been pre-staged. The Virtual Machines already have an identity tag applied. Two Endpoint groups should have automatically been created. These are the Endpoint Groups used in this workshop.  
-
 There are three (3) virtual machines (VMs) being used for this workshop that will serve as our Endpoints; **LGXX-WL01, LGXX-WL02 and LGXX-WL03**. These workloads are Ubuntu Linux VM’s The **XX** will be replaced with the _Lab Group number_ that was assigned at the start of this workshop.  
 
 These workload VMs are tagged in vSphere and will be leveraged for Rule and Policy mapping.  

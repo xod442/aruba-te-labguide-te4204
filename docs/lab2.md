@@ -3,7 +3,7 @@
 ## Lab Overview
 Lab time:  45 minutes  
 
-The spine leaf architecture provides for massive bandwidth between racks in the data center. Another reason for deploying a spine leaf is resiliency. The spine switches connect to leafs, the leafs, to the spines. The connections between them, are routed IP layer 3 links. They will not pass VLAN information. To get layer 2 traffic between the leafs, VXLAN must be used to create an overlay network.  
+The workshop is configured with two HPE Aruba CX10000 (CX10K) distrubted Services switches.
 
 ![Accessing the AFC](images/temp.png)  
 _Fig. Accessing the AFC_  
