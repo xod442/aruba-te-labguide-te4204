@@ -57,7 +57,7 @@ As the Aruba Fabric Composer relies on automation to deploy the data center infr
 
 In the HPE Arubas CX10K swicth there are two Data Processing Units (DPU). The process to send IPFIX and firewall logs to the ELKstack is depicted in the following diagram.
 
-![Lab Layout](images/flow.png)
+![Lab Layout](images/ipfix-flow.png)
 _Fig. Basic flow diagram_  
 
 The process is as follows:
