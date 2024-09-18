@@ -62,10 +62,10 @@ _Fig. Basic flow diagram_
 
 The process is as follows:
 
-1.  in LAB 1, you will integrate PSM into the AFC and define a policy to send all traffic to the DPU chips.
+1.  in LAB 2, you will integrate PSM into the AFC and define a policy to send all traffic to the DPU chips.
 
-2. In LAB 2, you will log into the PSM and verify that is has the CX10K switches admitted and the DPU's are operational.
+2. In LAB 3, you will log into the PSM and verify that is has the CX10K switches admitted and the DPU's are operational.
 
-3. In LAB 3, you will use Elastic Search to visualize the IPFIX flow information.
+3. In LAB 4, you will use Elastic Search to visualize the IPFIX flow information.
 
 
