@@ -4,7 +4,7 @@
 
 Lab time:  15 minutes
 
-In this lab, we are going to explore the lab environment and access the various components of the lab.  The lab consists of the following components:
+In this workshop, we are going to explore the environment and access the various components of the lab.  The lab consists of the following hardware:
 - 1x CX 6300 Switch which acts as the Spine 
 - 2x CX 10000 Switches configured as Leaf Switches
 - 1x ProLiant Server running ESXi and connected to both Leaf Switches  
@@ -46,12 +46,26 @@ https://www.arubanetworks.com/techdocs/VSG/docs/050-dc-deploy/esp-dc-deploy-120-
 - See also AFC User Guide (Version 6.5 used for this workshop): 
 https://www.arubanetworks.com/techdocs/AFC/PDFs/64/AFC64UG.pdf
 
-### Pensando integration  
-
-For this workshop, the AMD Pensando Policy and Services Manager (PSM) integration has been pre-staged. 
 
 ### IPv4 Address Pool  
 As the Aruba Fabric Composer relies on automation to deploy the data center infrastructure, an IPv4 address pool has been created and ready to use. (**10.100.0.0/24**)  
 
 ### MAC address pool
 As the Aruba Fabric Composer relies on automation to deploy the data center infrastructure, a MAC address pool has been created. This is just a pool of address that AFC can use to assign MAC addresses when required. (**02:00:00:00:00:aa-02:00:00:00:00:ff**)
+
+## 1.3 Telemetry flow 
+
+In the HPE Arubas CX10K swicth there are two Data Processing Units (DPU). The process to send IPFIX and firewall logs to the ELKstack is depicted in the following diagram.
+
+![Lab Layout](images/flow.png)
+_Fig. Basic flow diagram_  
+
+The process is as follows:
+
+1.  in LAB 1, you will integrate PSM into the AFC and define a policy to send all traffic to the DPU chips.
+
+2. In LAB 2, you will log into the PSM and verify that is has the CX10K switches admitted and the DPU's are operational.
+
+3. In LAB 3, you will use Elastic Search to visualize the IPFIX flow information.
+
+

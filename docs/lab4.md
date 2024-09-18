@@ -1,113 +1,222 @@
-# Lab 4 - Using ELK stack for collections and visibility  
+# Lab 4 - Navigating the Pensando PSM
 
 ## Lab Overview
-Lab time:  30 minutes 
+Lab time:  30 minutes  
+
+With all the systems in place, we can now leverage the various components to create a policy that can be deployed from a single pane of glass to multiple switches within the fabric.  
+
+### Build a rule
+### Assign Rule to Policy
+### Build End point groups
+
+## Lab 3.1 - Redirect VLANs to DSM  
 
 ### Description  
+The first step is to Configure the VRFs to sync with the Policy Service Manager that will utilize the defined networks..  
 
-In preparing for this lab, a pair of distributed virtual switches have been created. One connects to the **Leaf1A-10K** and the other connects to **Leaf1B-10K**. Proper connections have been made in advance. WL01 and WL02 are in vlan 10 port group, and WL03 is in vlan 20 port group.
-At this point of the lab. All traffic between the endpoint groups should be blocked except ssh from **workload01** & **workload02** to **workload03**. Open up a SSH session on all of the workloads.
+### Validate   
+1. In the Guided Setup Pane, switch from the **Network** tab to the **Distributed Services** tab.  _Be sure to switch over to Distributed Services from the Network Tab_!  
 
-## Validate
+![Distributed Services Menu](images/lab3-distributed-services-menu.png)  
+_Fig. Distributed Services Menu_  
 
-## Lab 4.1 - Test Firewall Rules  
+2. Click **Configure VRFs** to navigate to the VRFs page under **Configuration/Routing**  
 
-1. On the desktop, in the windows search bar (bottom left of screen) enter CMD to open a command window. Use SSH to connect to **all** the workloads out-of-band-management interface. 
-
-|||||
-|---|---|---|---|
-| WL-Name | User Name | Password | Address
-| Workload01 | arubatm | admin | 10.250.2<span style="color:orange">**[LG]**</span>.201 | 
-| Workload01 | arubatm | admin | 10.250.2<span style="color:orange">**[LG]**</span>.201 | 
-| Workload01 | arubatm | admin | 10.250.2<span style="color:orange">**[LG]**</span>.201 | 
-
-<hr>
-<br>
-
-Enter these commands on the jumphost.
-<br>
-
-``C:\Users\Admin> ssh arubatm@10.250.2LG.201 ``
-``C:\Users\Admin> ssh arubatm@10.250.2LG.202 ``
-``C:\Users\Admin> ssh arubatm@10.250.2LG.203 ``
-
-![ssh sessions](images/image2.png)  
-_Fig. 3 SSH sessions_
-
-2. Once logged into **Workload01**. Try to ping **10.0.20.101**, this should fail. Use **CRTL+C** to exit the ping.
-
-![ssh works](images/image3.png)  
-_Fig. SSH Succeeded_
-
-3. Try to **ssh** to **10.0.20.101**.  (ssh arubatm@10.0.20.101)
-
-![ssh works](images/image4.png)  
-_Fig. SSH Succeeded_
-
-```If your ssh fails, check the routes in the workstations!```
-
-4. Check workload 1:
-arubatm@workload-v10-101:
- **ip route**
-
- ![ssh works](images/image5.png)  
-_Fig. ip routes_
-
-**Workload-v10-101** seems to have a route to the 10.0.20.0/24 network. If the route is not there, add it.
-Enter **sudo ip route add 10.0.20.0/24 via 10.0.10.1** (password: admin)
-
-5. Check workload 2:
-arubatm@workload-v10-102:
- ip route
-
-  ![ssh works](images/image6.png)  
-_Fig. ip routes_
-
-**Workload-v10-102** needs to have a route to get to the **10.0.20.0/24a** network. 
-If it’s not there, add it. Enter **sudo ip route add 10.0.20.0/24 via 10.0.10.1** (password: admin)
-
-
-6. Check workload 3:
-arubatm@workload-v20-101: 
-ip route
-
-**Workload-v12-101** needs to have a route to get back to the **10.0.10.0/24** network. 
-Enter **sudo ip route add 10.0.10.0/24 via 10.0.20.1** (password: admin)
-
-  ![ssh works](images/image7.png)  
-_Fig. ip routes_
-
-
-### SSH for workload 2 and 3
-
-1. Move to **Workload02**. Try to ssh to **10.0.20.101** this should succeed. 
+3. In the Configure VRFs page, within the right-hand pane for Distributed Services, choose **dsa/over** as the selected VRF in the **Distributed Services Setup** drop-down, then select **Configure Networks** just below the VRF selection drop-down menu
 
 ```{note}
-The policy created earlier in the lab allows SSH from the WEB endpoint group to the DATABASE endpoint group. It BLOCKS all other traffic.
-```
-2. Move to **Workload03**. Try to ssh to **10.0.10.101** this should fail. Use CRTL+C to exit. There is no rule to allow ssh from the database server endpoint group.
+Be sure to select the dsa/over VRF
+```  
+
+![dsa over](images/lab3-dsa-over.png)  
+_Fig. dsa/over_  
+
+```{note}
+Also accessed via Configuration/Routing/VRF - [over] - (3 dots on left) /Networks/From Networks Tab/Actions Menu (mid-right) - Add
+```  
+
+4. In the **ACTIONS** menu under the **Networks** tab, click **Add** and configure the following for VLAN 10.  
+
+![Add Redirect](images/lab3-add-redirect.png)  
+_Fig. Add Redirect_  
+
+|||
+|---|---|
+| Step 1: Name ||  
+| Name | vlan10 |  
+| Description | vlan10 |  
+| Click **NEXT** to continue ||  
+
+|||
+|---|---|
+| Step 2: Settings ||  
+| VLAN | 10 |  
+| Click **NEXT** to continue ||  
+| Click **Apply** ||  
+
+5. Repeat the previous step, but for VLAN 20.  In the **ACTIONS** menu under the **Networks** tab, click **Add** and configure the following for VLAN 20.  
+
+|||
+|---|---|
+| Step 1: Name ||  
+| Name | vlan20 |  
+| Description | vlan20 |  
+| Click **NEXT** to continue ||  
+
+|||
+|---|---|
+| Step 2: Settings ||  
+| VLAN | 20 |  
+| Click **NEXT** to continue ||  
+| Click **Apply** ||  
+
+### Expected Results  
+
+1. You should see the newly created networks under the Networks tab for the VRF in a green Healthy state.  
+
+![VLANs Created](images/lab3-vlans-created.png)  
+_Fig. VLANs Created_  
+
+2. Verify the VLANs are in operation by using the embedded **CLI Command Tool** to verify their status.  
+
+The command to execute against the leaf switches is:  
+- ``show vlan``  
+- VLANs 10 & 20 should be listed  
+
+## Lab 3.2 Configure Endpoint Groups  
+
+### Overview 
+Endpoint group objects represent source and destination IP addresses referenced in firewall rules that can represent one or multiple devices. **Dynamic** endpoint groups can be **auto-populated** based on the assignment of **vSphere Tags** to VMs identified through AFC’s vCenter integration along with the PSM. All VMs assigned the same tag should be auto-populated as a member of the dynamic group when on a **distributed vSwitch**.  _When member IP addresses change or tag assignments are changed in vCenter, dynamic group objects are updated automatically_.  
+
+```{note}
+In this workshop you will see workloads that are learned from vSphere. You can ignore them, and create your own! 
+```  
+
+### Validate  
+1. In the **Guided Setup Pane**, under the **Distributed Services** tab, click **Configure Policy**, followed by **Endpoint Groups** on the left-hand menu.  
+
+![Configure Policy](images/lab3-configure-policy.png)  
+_Fig. Configure Policy_  
+
+```{note}
+Also accessed via Configuration/Policy/Endpoint Groups  
+```  
+
+```{note}
+To proceed with manual endpoint group creation, begin by clicking Add under the ACTIONS Menu in the top-right under Configuration/Policy/Endpoint Groups/Actions Menu (top-right)/Add
+```  
+
+![Add Enpoint Group](images/lab3-add-endpoint-group.png)  
+_Fig. Add Enpoint Group_  
+
+3. Enter the following configuration to create an Endoint Group for Workload01 & Workload02:
+
+|||
+|---|---|
+| Step 1: Name ||  
+| Name | Web Servers |  
+| Description | Web Server EPG |  
+| Click **NEXT** to continue ||  
+
+|||
+|---|---|
+| Step 2: Type ||  
+| Type | Layer 3 ***(default setting)*** |  
+| Click **NEXT** to continue ||  
+
+|||
+|---|---|
+| Step 3: Endpoints ||  
+| Criteria | VM Tag ***(default setting)*** |  
+| VM Tag | AFC-integration.Workload01 _(select from the dropdown)_ |  
+| VNIC | Network adapter 2 ||
+| Scroll down and click **Add** ||  
+
+![VM Tag](images/lab3-vm-tag.png)  
+_Fig. VM Tag_  
+
+```{note}
+Stay on the Endpoints page and repeat the process again to add Workload02, you will have two workloads in this Endpoint Group!  
+```  
+
+|||
+|---|---|
+| Step 4: Endpoints ||  
+| Criteria | VM Tag ***(default setting)*** |  
+| VM Tag | AFC-integration.Workload02 _(select from the dropdown)_ |  
+| VNIC | Network adapter 2 ||
+| Scroll down and click **Add** ||  
+| Click **Next** to continue ||  
+
+|||
+|---|---|
+| Step 5: Summary ||  
+| On the Summary page, verify the settings, then click **Apply** to save the configuration. |  
+
+![Web Server EPG](images/lab3-web-server-epg.png)  
+_Fig. Web Server EPG_  
+
+4. Now create a second Endpoint Group for the Database Servers, by clicking **Add** under the **ACTIONS** menu.  
+
+|||
+|---|---|
+| Step 1: Name ||  
+| Name | Database-Servers |  
+| Description | Database-Servers EPG |  
+| Click **NEXT** to continue ||  
+
+|||
+|---|---|
+| Step 2: Type ||  
+| Type | Layer 3 ***(default setting)*** |  
+| Click **NEXT** to continue ||  
+
+|||
+|---|---|
+| Step 3: Endpoints ||  
+| Criteria | VM Tag ***(default setting)*** |  
+| VM Tag | AFC-integration.Workload03 _(select from the dropdown)_ |  
+| VNIC | Network adapter 2 ||
+| Scroll down and click **Add** ||  
+| On the Summary page, verify the settings, then click **Apply** to save the configuration. |  
 
 
-## Lab 4.2 - Permit ssh from database to web endpoint group
+### Expected Results  
 
-A rule will have to be added to our ingress and egress policies to permit SSH from the **DATABASE** endpoint group to the **WEB** endpoint group.
+Verify the Endpoint Groups were created successfully, as shown in the following screenshot.  
 
-### Validate
+![Endpoint Groups](images/lab3-endpoint-groups.png)  
+_Fig. Endpoint Groups_  
 
-1. Go back to the Aruba Fabric Composer window and navigate to **Configuration/Policy/Rules**
+## Lab 3.3 Create Firewall Rules  
 
-![rules](images/image8.png)  
-_Fig. Rules_
+### Description  
+The goals of the rules that will be used to enforce the policy for this workshop, seek to achieve three things in this scenario:  
 
-### Create the allow-db-ssh-web rule
+- Allow **workload01** and **workload02** to SSH into **workload03**  
+- Block everything else between these two workloads  
+- Allow everything else
 
+### Validate  
+1. Under the **Configuration** menu, go to **Policy/Rules**  
+
+![Policy Rules Menu](images/lab3-policy-rules-menu.png)  
+_Fig. Policy Rules Menu_  
+
+2. First, we will create the ``Allow SSH Web to DB Rule``.  Under **ACTIONS**, click **ADD** to create a rule, and configure the following parameters.  
+
+```{note}
+Stick to lower-case & NO SPACES for the Rule Name (may result in errors when applying these rules to a policy if not entered the same as below as the UI does not restrict case at this time.)
+```  
+
+![Rule Workflow](images/lab3-rule-workflow.png)  
 _Fig. Rule Worklow_  
 
 |||  
 |---|---|  
 | Step 1: Name ||  
-| Name | allow-ssh-db-web |  
-| Description | Allow SSH between Database and Web Servers |  
+| Name | allow-ssh-web-db |  
+| Description | Allow SSH between Web and Database Servers |  
 | Click **NEXT** to continue ||  
 
 |||  
@@ -120,8 +229,8 @@ _Fig. Rule Worklow_
 |||  
 |---|---|  
 | Step 3: Endpoint Groups ||  
-| Source Endpoint Group | Database-Servers |  
-| Destination Endpoint Group | Web-Servers |  
+| Source Endpoint Group | Web-Servers |  
+| Destination Endpoint Group | Database-Servers |  
 | Click **NEXT** to continue ||  
 
 |||  
@@ -132,78 +241,231 @@ _Fig. Rule Worklow_
 | Click **NEXT** to continue ||  
 | Review the Summary and click **Apply** ||  
 
-## Expected Results
+3. Now we will create the second rule: ``Web to Database Rule``.  Under **ACTIONS**, click **ADD** to create a rule, and configure the following parameters.  
 
-On the screen you will see a new rule. Next task is to add this rule to the ingress and egress policy.
+|||  
+|---|---|  
+| Step 1: Name ||  
+| Name | drop-all-web-db |  
+| Description | Block all other traffic between web and database |  
+| Click **NEXT** to continue ||  
 
-![new-rule](images/image9.png)  
-_Fig. New Rule_
+|||  
+|---|---|  
+| Step 2: Settings ||  
+| Type | Layer 3 |  
+| Action | Drop |  
+| Click **NEXT** to continue ||  
 
-## Lab 4.3 Modify the egress policy with the new rule
+|||  
+|---|---|  
+| Step 3: Endpoint Groups ||  
+| Source Endpoint Group | Web-Servers |  
+| Destination Endpoint Group | Database-Servers |  
+| Click **NEXT** to continue ||  
 
-1. Navigate to Configuration/Policy/Policies 
+|||  
+|---|---|  
+| Step 4: Applications and Service Qualifiers  ||  
+| Applications | ***leave empty*** |  
+| Service Qualifiers | all |  
+| Click **NEXT** to continue ||  
+| Review the Summary and click **Apply** ||  
 
-2. Select the **egress** policy and from the **Actions** menu choose edit. 
+4. Now we will create the third rule: ``Database to Web Rule``.  Under **ACTIONS**, click **ADD** to create a rule, and configure the following parameters.  
 
-![edit-policy](images/image10.png)  
-_Fig. Edit Egress Policy_
+|||  
+|---|---|  
+| Step 1: Name ||  
+| Name | drop-all-db-web |  
+| Description | Block all other traffic between database and web |  
+| Click **NEXT** to continue ||  
 
-3. Click on the **rules** tab at the top of the dialog. Then **Add/Existing**.
+|||  
+|---|---|  
+| Step 2: Settings ||  
+| Type | Layer 3 |  
+| Action | Drop |  
+| Click **NEXT** to continue ||  
 
-![edit-policy](images/image11.png)  
-_Fig. Add Existing Rule_
+|||  
+|---|---|  
+| Step 3: Endpoint Groups ||  
+| Source Endpoint Group | Web-Servers |  
+| Destination Endpoint Group | Database-Servers |  
+| Click **NEXT** to continue ||  
 
-4. Click on the **allow-ssh-db-web** rule and click **Apply**.
+|||  
+|---|---|  
+| Step 4: Applications and Service Qualifiers  ||  
+| Applications | ***leave empty*** |  
+| Service Qualifiers | all |  
+| Click **NEXT** to continue ||  
+| Review the Summary and click **Apply** ||  
 
-![select-rule](images/image12.png)  
-_Fig. Select Rule_
+5. Now we will create the last and catch all rule: ``Allow Any to Any Rule``.  Under **ACTIONS**, click **ADD** to create a rule, and configure the following parameters.  
 
-5. Make sure the rules appear like the next diagram shows. The allow SSH rules must be **at the top** of the rule list. Click **APPLY**.
+|||  
+|---|---|  
+| Step 1: Name ||  
+| Name | allow-all |  
+| Description | Allow all traffic |  
+| Click **NEXT** to continue ||  
 
-![rule-position](images/image13.png)  
-_Fig. Rule Position_
+|||  
+|---|---|  
+| Step 2: Settings ||  
+| Type | Layer 3 |  
+| Action | Allow |  
+| Click **NEXT** to continue ||  
 
-## Lab 4.4 Modify the ingress policy with the new rule
+|||  
+|---|---|  
+| Step 3: Endpoint Groups ||  
+| Source Endpoint Group | ***leave blank*** |  
+| Destination Endpoint Group | ***leave blank*** |  
+| Click **NEXT** to continue ||  
 
-1. Navigate to Configuration/Policy/Policies 
+|||  
+|---|---|  
+| Step 4: Applications and Service Qualifiers  ||  
+| Applications | ***leave empty*** |  
+| Service Qualifiers | all |  
+| Click **NEXT** to continue ||  
+| Review the Summary and click **Apply** ||  
 
-2. Select the **ingress** policy and from the **Actions** menu choose edit. 
+### Expected Results  
+When finished, you should see four rules like in the screenshot below.  
 
-![edit-policy](images/image14.png)  
-_Fig. Edit Egress Policy_
+![Rule List](images/lab3-rule-list.png)  
+_Fig. Rule List_  
 
-3. Click on the **rules** tab at the top of the dialog. Then **Add/Existing**.
+## Lab 3.4 Create Firewall Policy  
 
-![edit-policy](images/image15.png)  
-_Fig. Add Existing Rule_
+### Description 
 
-4. Click on the **allow-ssh-db-web** rule and click **Apply**.
+Now that the rules are in place, create a Policy to enforce those rules, showcasing the power of the CX10K to apply stateful firewall rules at scale and effectively govern east-west traffic.
 
-![select-rule](images/image16.png)  
-_Fig. Select Rule_
+### Validate - Ingress policy 
+1.  In the **Configuration Menu**, go to **Policy/Policies**.
 
-5. Make sure the rules appear like the next diagram shows. The allow SSH rules must be **at the top** of the rule list. Click **APPLY**.
+```{note}
+Also accessed via the ‘Guided Setup Pane/Distributed Services Tab/Configure Policy’
+```
+2.  Under the Actions Menu, select **Add** to create a policy and configure the following parameters:
 
-![rule-position](images/image13.png)  
-_Fig. Rule Position_
+![Policy](images/pol1.png)  
+_Fig. Policy_  
 
-## Lab 4.5 Test new rule
+|||  
+|---|---|  
+| Step 1. Name ||  
+| Name | ``dsa-ingress-policy`` |     
+| Click **NEXT** to continue ||  
 
-1. Return to the SSH sessions that have been established to each workload.
+|||  
+|---|---|  
+| Step 2. Policies ||  
+| Type | ``distributed firewall`` |     
+| Click **NEXT** to continue ||  
 
-2. Once logged into **Workload03** try to ping **10.0.10.101**, this should fail. Use CRTL+C to exit the ping.
+Step 3.
 
-![ping-fails](images/image17.png)  
-_Fig. Ping Fails_
+Add rules to the policy by using the **Actions** menu and select **Add**. You will add existing rules to this policy, make sure they are in the correct order.
 
-3. From **workload03** try to SSH to **Workload01**. 
+Using the arrows on the left move the rules into the correct order. Be sure to move the allow-all rule to the bottom of the sequence (rule #4)
 
-### Expected Results 
-
-You can see that the ssh session is succesful. If not, go back and check the rule order.
-
-![ssh-works](images/image18.png)  
-_Fig. ssh works_
+Click **NEXT** to continue
 
 
+![Arange Rules](images/pol2.png)  
+_Fig. Arange Rules_  
 
+
+3. Add the enforcer information.
+
+![Arange Rules](images/pol3.png)  
+_Fig. Enforcers_  
+
+|||  
+|---|---|  
+| Step 1. Name ||  
+| Faric | ``dsa`` |
+| Policy Distribution Type | ``leaf`` |
+| Direction | ``ingress`` |
+| VRF | ``over`` |
+| Networks | ``Pick both vlan 10 & 20`` |
+| Click **ADD** , next to the **CLEAR** button |    
+| Click **NEXT** and **APPLY** ||  
+
+### Define Egress Policy
+
+1. Using the same process, add another policy for the **egreess** policy.
+
+2.  Under the Actions Menu, select **Add** to create a policy and configure the following parameters:
+
+![Policy](images/pol1.png)  
+_Fig. Policy_  
+
+|||  
+|---|---|  
+| Step 1. Name ||  
+| Name | ``dsa-egress-policy`` |     
+| Click **NEXT** to continue ||  
+
+|||  
+|---|---|  
+| Step 2. Policies ||  
+| Type | ``distributed firewall`` |     
+| Click **NEXT** to continue ||  
+
+Step 3.
+
+Add rules to the policy by using the **Actions** menu and select **Add**. You will add existing rules to this policy, make sure they are in the correct order.
+
+Using the arrows on the left move the rules into the correct order. Be sure to move the allow-all rule to the bottom of the sequence (rule #4)
+
+Click **NEXT** to continue
+
+
+![Arange Rules](images/pol2.png)  
+_Fig. Arange Rules_  
+
+
+3. Add the enforcer information.
+
+![Arange Rules](images/pol3.png)  
+_Fig. Enforcers_  
+
+|||  
+|---|---|  
+| Step 1. Name ||  
+| Faric | ``dsa`` |
+| Policy Distribution Type | ``leaf`` |
+| Direction | ``egress`` |
+| VRF | ``over`` |
+| Networks | ``Pick both vlan 10 & 20`` |
+| Click **ADD** , next to the **CLEAR** button |    
+| Click **NEXT** and **APPLY** ||  
+
+```{note}
+NOTE: If you don’t see both policies are healthy, click on the refresh wheel next to the actions menu
+```
+
+### Expected Results  
+
+Verify the policies.
+![Arange Rules](images/pol5.png)  
+_Fig. Policies_  
+
+
+## Lab 3 Summary
+
+In this lab you redirected vlan 10 and 20 to be examined by the DPU chips on the HPE Aruba Networking CX10K switch. You have to create endpoint groups and add VMs to them. Finally, you created rules and policies to limit traffic flow between the two endpoint groups.
+
+## Lab 3 Learning Check
+
+- Endpoint Groups are just logical containers for sever VMs with a similar function.
+- Ingress is for traffic leaving the DPU
+- Egrees is for traffic coming into the DPU.
+- Rules are added to policies, a rule can belong to more than one policy.
