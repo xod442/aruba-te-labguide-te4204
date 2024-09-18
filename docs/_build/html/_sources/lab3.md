@@ -1,9 +1,13 @@
-# Lab 3 - PSM Integration
+# Lab 3 - Building AFC POlicy
 
 ## Lab Overview
 Lab time:  30 minutes  
 
 With all the systems in place, we can now leverage the various components to create a policy that can be deployed from a single pane of glass to multiple switches within the fabric.  
+
+### Build a rule
+### Assign Rule to Policy
+### Build End point groups
 
 ## Lab 3.1 - Redirect VLANs to DSM  
 

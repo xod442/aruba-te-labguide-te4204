@@ -242,7 +242,5 @@ _Fig. Lab 2 DSS Overview_
 
 
 
-### Build a rule
-### Assign Rule to Policy
-### Build End point groups
+
 ### Explore AFC 

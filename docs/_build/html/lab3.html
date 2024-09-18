@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Lab 3 - PSM Integration &#8212; CX 10K Spine-Leaf Workshop</title>
+    <title>Lab 3 - Building AFC POlicy &#8212; CX 10K Spine-Leaf Workshop</title>
   
   
   
@@ -61,7 +61,7 @@
     <link rel="icon" href="_static/fav-icon-32.png"/>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Lab 4 - Using ELK stack for collections and visibility" href="lab4.html" />
+    <link rel="next" title="Lab 4 - Navigating the Pensando PSM" href="lab4.html" />
     <link rel="prev" title="Lab 2 - AFC Configuration" href="lab2.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -183,8 +183,8 @@
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="lab1.html">Lab 1 - Accessing the Lab</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lab2.html">Lab 2 - AFC Configuration</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Lab 3 - PSM Integration</a></li>
-<li class="toctree-l1"><a class="reference internal" href="lab4.html">Lab 4 - Using ELK stack for collections and visibility</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Lab 3 - Building AFC POlicy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lab4.html">Lab 4 - Navigating the Pensando PSM</a></li>
 <li class="toctree-l1"><a class="reference internal" href="summary.html">Summary and Feedback</a></li>
 </ul>
 
@@ -324,7 +324,7 @@ document.write(`
               
 
 <div id="jb-print-docs-body" class="onlyprint">
-    <h1>Lab 3 - PSM Integration</h1>
+    <h1>Lab 3 - Building AFC POlicy</h1>
     <!-- Table of contents -->
     <div id="print-main-content">
         <div id="jb-print-toc">
@@ -334,7 +334,12 @@ document.write(`
             </div>
             <nav aria-label="Page">
                 <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lab-overview">Lab Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lab-overview">Lab Overview</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#build-a-rule">Build a rule</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#assign-rule-to-policy">Assign Rule to Policy</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#build-end-point-groups">Build End point groups</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lab-3-1-redirect-vlans-to-dsm">Lab 3.1 - Redirect VLANs to DSM</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#description">Description</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#validate">Validate</a></li>
@@ -373,12 +378,21 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section class="tex2jax_ignore mathjax_ignore" id="lab-3-psm-integration">
-<h1>Lab 3 - PSM Integration<a class="headerlink" href="#lab-3-psm-integration" title="Link to this heading">#</a></h1>
+  <section class="tex2jax_ignore mathjax_ignore" id="lab-3-building-afc-policy">
+<h1>Lab 3 - Building AFC POlicy<a class="headerlink" href="#lab-3-building-afc-policy" title="Link to this heading">#</a></h1>
 <section id="lab-overview">
 <h2>Lab Overview<a class="headerlink" href="#lab-overview" title="Link to this heading">#</a></h2>
 <p>Lab time:  30 minutes</p>
 <p>With all the systems in place, we can now leverage the various components to create a policy that can be deployed from a single pane of glass to multiple switches within the fabric.</p>
+<section id="build-a-rule">
+<h3>Build a rule<a class="headerlink" href="#build-a-rule" title="Link to this heading">#</a></h3>
+</section>
+<section id="assign-rule-to-policy">
+<h3>Assign Rule to Policy<a class="headerlink" href="#assign-rule-to-policy" title="Link to this heading">#</a></h3>
+</section>
+<section id="build-end-point-groups">
+<h3>Build End point groups<a class="headerlink" href="#build-end-point-groups" title="Link to this heading">#</a></h3>
+</section>
 </section>
 <section id="lab-3-1-redirect-vlans-to-dsm">
 <h2>Lab 3.1 - Redirect VLANs to DSM<a class="headerlink" href="#lab-3-1-redirect-vlans-to-dsm" title="Link to this heading">#</a></h2>
@@ -1423,7 +1437,7 @@ document.write(`
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Lab 4 - Using ELK stack for collections and visibility</p>
+        <p class="prev-next-title">Lab 4 - Navigating the Pensando PSM</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -1443,7 +1457,12 @@ document.write(`
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lab-overview">Lab Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lab-overview">Lab Overview</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#build-a-rule">Build a rule</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#assign-rule-to-policy">Assign Rule to Policy</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#build-end-point-groups">Build End point groups</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lab-3-1-redirect-vlans-to-dsm">Lab 3.1 - Redirect VLANs to DSM</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#description">Description</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#validate">Validate</a></li>

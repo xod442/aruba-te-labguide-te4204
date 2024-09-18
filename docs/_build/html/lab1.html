@@ -183,8 +183,8 @@
         <ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Lab 1 - Accessing the Lab</a></li>
 <li class="toctree-l1"><a class="reference internal" href="lab2.html">Lab 2 - AFC Configuration</a></li>
-<li class="toctree-l1"><a class="reference internal" href="lab3.html">Lab 3 - PSM Integration</a></li>
-<li class="toctree-l1"><a class="reference internal" href="lab4.html">Lab 4 - Using ELK stack for collections and visibility</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lab3.html">Lab 3 - Building AFC POlicy</a></li>
+<li class="toctree-l1"><a class="reference internal" href="lab4.html">Lab 4 - Navigating the Pensando PSM</a></li>
 <li class="toctree-l1"><a class="reference internal" href="summary.html">Summary and Feedback</a></li>
 </ul>
 
@@ -337,11 +337,11 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lab-overview">Lab Overview</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lab-1-1-management-ip-addresses">Lab 1.1 Management IP Addresses</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lab-software-versions">1.2 Lab Software Versions</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pensando-integration">Pensando integration</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ipv4-address-pool">IPv4 Address Pool</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mac-address-pool">MAC address pool</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#telemetry-flow">1.3 Telemetry flow</a></li>
 </ul>
             </nav>
         </div>
@@ -358,7 +358,7 @@ document.write(`
 <section id="lab-overview">
 <h2>Lab Overview<a class="headerlink" href="#lab-overview" title="Link to this heading">#</a></h2>
 <p>Lab time:  15 minutes</p>
-<p>In this lab, we are going to explore the lab environment and access the various components of the lab.  The lab consists of the following components:</p>
+<p>In this workshop, we are going to explore the environment and access the various components of the lab.  The lab consists of the following hardware:</p>
 <ul class="simple">
 <li><p>1x CX 6300 Switch which acts as the Spine</p></li>
 <li><p>2x CX 10000 Switches configured as Leaf Switches</p></li>
@@ -443,10 +443,6 @@ document.write(`
 <li><p>See also AFC User Guide (Version 6.5 used for this workshop):
 <a class="reference external" href="https://www.arubanetworks.com/techdocs/AFC/PDFs/64/AFC64UG.pdf">https://www.arubanetworks.com/techdocs/AFC/PDFs/64/AFC64UG.pdf</a></p></li>
 </ul>
-<section id="pensando-integration">
-<h3>Pensando integration<a class="headerlink" href="#pensando-integration" title="Link to this heading">#</a></h3>
-<p>For this workshop, the AMD Pensando Policy and Services Manager (PSM) integration has been pre-staged.</p>
-</section>
 <section id="ipv4-address-pool">
 <h3>IPv4 Address Pool<a class="headerlink" href="#ipv4-address-pool" title="Link to this heading">#</a></h3>
 <p>As the Aruba Fabric Composer relies on automation to deploy the data center infrastructure, an IPv4 address pool has been created and ready to use. (<strong>10.100.0.0/24</strong>)</p>
@@ -455,6 +451,18 @@ document.write(`
 <h3>MAC address pool<a class="headerlink" href="#mac-address-pool" title="Link to this heading">#</a></h3>
 <p>As the Aruba Fabric Composer relies on automation to deploy the data center infrastructure, a MAC address pool has been created. This is just a pool of address that AFC can use to assign MAC addresses when required. (<strong>02:00:00:00:00:aa-02:00:00:00:00:ff</strong>)</p>
 </section>
+</section>
+<section id="telemetry-flow">
+<h2>1.3 Telemetry flow<a class="headerlink" href="#telemetry-flow" title="Link to this heading">#</a></h2>
+<p>In the HPE Arubas CX10K swicth there are two Data Processing Units (DPU). The process to send IPFIX and firewall logs to the ELKstack is depicted in the following diagram.</p>
+<p><img alt="Lab Layout" src="_images/flow.png" />
+<em>Fig. Basic flow diagram</em></p>
+<p>The process is as follows:</p>
+<ol class="arabic simple">
+<li><p>in LAB 1, you will integrate PSM into the AFC and define a policy to send all traffic to the DPU chips.</p></li>
+<li><p>In LAB 2, you will log into the PSM and verify that is has the CX10K switches admitted and the DPU’s are operational.</p></li>
+<li><p>In LAB 3, you will use Elastic Search to visualize the IPFIX flow information.</p></li>
+</ol>
 </section>
 </section>
 
@@ -525,11 +533,11 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lab-overview">Lab Overview</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lab-1-1-management-ip-addresses">Lab 1.1 Management IP Addresses</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#lab-software-versions">1.2 Lab Software Versions</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#pensando-integration">Pensando integration</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#ipv4-address-pool">IPv4 Address Pool</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#mac-address-pool">MAC address pool</a></li>
 </ul>
 </li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#telemetry-flow">1.3 Telemetry flow</a></li>
 </ul>
   </nav></div>
 
