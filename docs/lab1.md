@@ -2,7 +2,7 @@
 
 ## Lab Overview
 
-Lab time:  15 minutes
+Lab time:  15 minutes.
 
 In this workshop, we are going to explore the environment and access the various components of the lab.  The lab consists of the following hardware:
 - 1x CX 6300 Switch which acts as the Spine 
